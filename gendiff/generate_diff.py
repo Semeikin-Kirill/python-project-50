@@ -1,17 +1,24 @@
 import json
-from gendiff.parser import data_parser
+import yaml
+from pathlib import Path
+from gendiff.tree import create_tree
 
 
-def dec_bool(param):
-    for key, value in param.items():
-        if isinstance(value, bool):
-            param[key] = 'true' if value else 'false'
-    return param
+def parser_yaml(data):
+    return yaml.load(data, Loader=yaml.CLoader)
+
+
+parsers = {
+    'json': lambda data: json.load(data),
+    'yml': parser_yaml,
+    'yaml': parser_yaml
+}
 
 
 def get_data(file_path):
+    suffix = Path(file_path).suffix[1:]
     with open(file_path) as data:
-        return json.load(data, object_hook=dec_bool)
+        return parsers[suffix](data)
 
 
 def changed(key, values):
@@ -37,7 +44,7 @@ def string_generation(items):
 def generate_diff(file_path1, file_path2):
     data1 = get_data(file_path1)
     data2 = get_data(file_path2)
-    tree = data_parser(data1, data2)
+    tree = create_tree(data1, data2)
     items = sorted(tree.items(), key=lambda items: items[0])
     result = ['{', *list(map(string_generation, items)), '}']
     return '\n'.join(result)
