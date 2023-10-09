@@ -10,7 +10,6 @@ FILE4 = 'tests/fixtures/file4.yaml'
 @pytest.fixture
 def get_expected():
     with open('tests/fixtures/expected.txt') as expected_data:
-        print(expected_data)
         return expected_data.read().strip()
 
 
