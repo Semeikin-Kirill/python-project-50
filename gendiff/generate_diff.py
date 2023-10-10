@@ -1,7 +1,7 @@
 from pathlib import Path
 from gendiff.tree import create_tree
 from gendiff.parser import parser
-from gendiff.formaters.stylish import node_stringify
+from .formaters import node_stringify, plain
 
 
 def get_data(file_path):
@@ -11,7 +11,8 @@ def get_data(file_path):
 
 
 formaters = {
-    'stylish': node_stringify
+    'stylish': node_stringify,
+    'plain': plain
 }
 
 
