@@ -1,7 +1,7 @@
 symbols = {
-  'added': '+',
-  'deleted': '-',
-  'unchanged': ' ',
+    'added': '+',
+    'deleted': '-',
+    'unchanged': ' ',
 }
 
 
@@ -32,9 +32,9 @@ def node_stringify(tree_diff):
                         '{0}  {1}: {2}'.format(indent,
                                                node['name'],
                                                '\n'.join([
-                                                 '{',
-                                                 iter(children, depth + 1),
-                                                 f'{indent}  }}'])))
+                                                   '{',
+                                                   iter(children, depth + 1),
+                                                   f'{indent}  }}'])))
                 case 'changed':
                     value1 = stringify(node['value1'], depth)
                     value2 = stringify(node['value2'], depth)

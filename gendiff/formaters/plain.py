@@ -17,7 +17,7 @@ def plain(tree_diff):
             match(node['type']):
                 case 'added':
                     result.append(
-                       f'''Property '{current_path
+                        f'''Property '{current_path
                                       }' was added with value: {stringify(
                           node['value'])}''')
                 case 'deleted':
