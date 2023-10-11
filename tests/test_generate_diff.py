@@ -19,6 +19,12 @@ def get_expected_plain():
         return expected_data.read().strip()
 
 
+@pytest.fixture
+def get_expected_json():
+    with open('tests/fixtures/expected_json.json') as expected_data:
+        return expected_data.read().strip()
+
+
 def test_generate_diff_json_file(get_expected_stylish):
     assert generate_diff(FILE1, FILE2) == get_expected_stylish
 
@@ -33,3 +39,11 @@ def test_generate_diff_json_file_plain(get_expected_plain):
 
 def test_generate_diff_yaml_file_plain(get_expected_plain):
     assert generate_diff(FILE3, FILE4, 'plain') == get_expected_plain
+
+
+def test_generate_diff_json_file_json(get_expected_json):
+    assert generate_diff(FILE1, FILE2, 'json') == get_expected_json
+
+
+def test_generate_diff_yaml_file_json(get_expected_json):
+    assert generate_diff(FILE3, FILE4, 'json') == get_expected_json

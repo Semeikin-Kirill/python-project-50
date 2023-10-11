@@ -9,7 +9,7 @@ def stringify(value):
     return str(value)
 
 
-def plain(treeDiff):
+def plain(tree_diff):
     def iter(tree, path):
         result = []
         for node in tree:
@@ -30,4 +30,4 @@ def plain(treeDiff):
                 case 'nested':
                     result.extend(iter(node['children'], [current_path]))
         return list(chain(result))
-    return '\n'.join(iter(treeDiff, []))
+    return '\n'.join(iter(tree_diff, []))

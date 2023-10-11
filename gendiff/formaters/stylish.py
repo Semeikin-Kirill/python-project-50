@@ -20,7 +20,7 @@ def stringify(node, depth):
     return '\n'.join(['{', *result, f'{indent}  }}'])
 
 
-def node_stringify(treeDiff):
+def node_stringify(tree_diff):
     def iter(tree, depth):
         indent = get_indent(depth)
         result = []
@@ -48,4 +48,4 @@ def node_stringify(treeDiff):
                     result.append(
                         '{0}{1} {2}: {3}'.format(indent, symbol, name, value))
         return '\n'.join(result)
-    return '\n'.join(['{', iter(treeDiff, 1), '}'])
+    return '\n'.join(['{', iter(tree_diff, 1), '}'])

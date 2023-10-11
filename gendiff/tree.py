@@ -6,13 +6,15 @@ def change_bool(value):
     return value
 
 
-def create_tree(first_data, second_data):
+def create_tree(first_data, second_data, formatter=None):
     uniq_keys = set([*first_data.keys(), *second_data.keys()])
     sorted_keys = sorted(list(uniq_keys))
     tree = []
     for key in sorted_keys:
-        value1 = change_bool(first_data.get(key))
-        value2 = change_bool(second_data.get(key))
+        value1 = first_data.get(key) if formatter == 'json' else change_bool(
+            first_data.get(key))
+        value2 = second_data.get(key) if formatter == 'json' else change_bool(
+            second_data.get(key))
         if key not in first_data:
             tree.append({
                 'name': key,
@@ -29,7 +31,7 @@ def create_tree(first_data, second_data):
             tree.append({
                 'name': key,
                 'type': 'nested',
-                'children': create_tree(value1, value2)
+                'children': create_tree(value1, value2, formatter)
             })
         elif value1 != value2:
             tree.append({
